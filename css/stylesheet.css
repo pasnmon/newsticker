@@ -71,7 +71,7 @@ input#searchField{
 }
 
 li.nav-item a{
-    color: red !important;
+    color: white !important;
     text-decoration: none;
 
 }
@@ -105,7 +105,7 @@ li.nav-item {
 }
 
 li.active a{
-    border-bottom: solid 2px !important;
+    border-bottom: solid white 2px !important;
 }
 
 .jumbotron{

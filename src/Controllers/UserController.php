@@ -102,7 +102,7 @@ class UserController extends AbstractSecurity
         if ($_POST){
             $data = $_POST;
             if ($this->context["action"] == "editUser" && trim($data["password"]) == ""){
-                $data["password"] = null;
+                unset($data["password"]);
             }
 
             $user -> mapFromArray($data);
