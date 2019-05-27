@@ -8,7 +8,6 @@
 
 namespace Controllers;
 
-use function Sodium\add;
 
 class TagController extends AbstractSecurity
 {

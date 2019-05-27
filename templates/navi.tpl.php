@@ -4,11 +4,9 @@
         </button>
         <div class="collapse navbar-collapse navbar" id="collapsibleNavbar">
             <ul id="mainmenu" class="nav navbar-nav">
-                <?php if (isLoggedIn()): ?>
                 <li class="nav-item <?= ($controller == "IndexController" && ($action == "index" || $action == "read" || $action == "search"))? "active":""?>">
                     <a class="nav-link" href="index.php">Home</a>
                 </li>
-                <?php endif; ?>
                 <?php if (isLoggedIn() && getGroupId($em) == 1){ ?>
                 <li class="nav-item <?= ($controller == "IndexController" && $action != "index" && $action != "read" && $action != "search")? "active":""?>">
                     <a class="nav-link" href="index.php?action=add">Create Article</a>
