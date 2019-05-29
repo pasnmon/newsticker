@@ -18,6 +18,7 @@ $em->getConnection()->query('SET FOREIGN_KEY_CHECKS=0;');
 $em->getConnection()->query('TRUNCATE TABLE tags;');
 $em->getConnection()->query('TRUNCATE TABLE users;');
 $em->getConnection()->query('TRUNCATE TABLE tagging;');
+$em->getConnection()->query('TRUNCATE TABLE userGroups;');
 $em->getConnection()->query('TRUNCATE TABLE articles;');
 $em->getConnection()->query('SET FOREIGN_KEY_CHECKS=1;');
 // Schritt 2
@@ -30,7 +31,7 @@ foreach ($entries as $entry) {
     $tag = new Tag($entry);
     $em->persist($tag);
 }
-$entries = ["title" => "Admin","title" => "Gast"];
+$entries = [["title" => "Admin","rights" => 11], ["title" => "Gast","rights" => 11]];
 foreach ($entries as $entry){
     $userGroup = new \Entities\UserGroup($entry);
     $em->persist($userGroup);

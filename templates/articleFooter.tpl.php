@@ -6,7 +6,6 @@
  * Time: 07:40
  */
 $tags = $article->getTags();
-$tags = [$tags[0],$tags[1]];
 ?>
 <footer>
     Erstellt am
@@ -21,7 +20,7 @@ $tags = [$tags[0],$tags[1]];
         <a href="index.php?controller=tag&amp;action=read&amp;id=<?= $tag->getId() ?>">
             <?= $tag ?>
         </a>
-        <?= (next($tags) ? "," : "") ?>
+        <?= ($key == count($tags)-1) ? "" : "," ?>
 
     <?php endforeach; ?>
 </footer>

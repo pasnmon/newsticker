@@ -7,7 +7,9 @@
  */
 ?>
 
-<?php foreach ($users as $user): ?>
+<?php
+foreach ($users as $user):
+    if ($user->getDisplayName() != "deleted"): ?>
 <div class="jumbotron">
     <article>
         <header>
@@ -20,4 +22,7 @@
         </div>
     </article>
 </div>
-<?php endforeach; ?>
+
+<?php
+endif;
+endforeach; ?>

@@ -3,9 +3,17 @@
 namespace Controllers;
 
 use Entities\Article;
+use Doctrine\ORM\EntityManager;
 
 class IndexController extends AbstractSecurity
 {
+
+    public function __construct($basePath, EntityManager $em)
+    {
+        parent::__construct($basePath, $em);
+        $this->setPermission("article");
+    }
+
     protected function indexAction()
     {
         $em = $this->getEntityManager();

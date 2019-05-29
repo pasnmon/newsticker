@@ -15,12 +15,14 @@ trait ArrayMappable{
     public function mapFromArray(array $data, $camelize = true){
         if ($data) {
             foreach ($data as $key => $value) {
+
                 if ($camelize){
                     $setterName = "set".StringConverter::camelize($key);
                 }
                 else{
                     $setterName = "set".ucfirst($key);
                 }
+
                 if (method_exists($this, $setterName)) {
                     $this->$setterName($value);
                 }

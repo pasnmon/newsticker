@@ -19,9 +19,10 @@ abstract class AbstractSecurity extends AbstractBase
         if (!in_array($action,["login","register","index","read"]) && !isLoggedIn() ){
             $this->redirect("login","user");
         }
-        if (in_array($action,["edit","delete","add"]) && getGroupId($this->getEntityManager()) != 1){
-            $this->redirect();
-        }
+
+        if (in_array($action,["edit","delete","add","show"]) && !getRights($this->getPermission(),$this->getEntityManager()))
+                $this->redirect();
+
         parent::run($action);
     }
 }

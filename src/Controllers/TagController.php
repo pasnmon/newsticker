@@ -8,9 +8,18 @@
 
 namespace Controllers;
 
+use Doctrine\ORM\EntityManager;
+
 
 class TagController extends AbstractSecurity
 {
+
+    public function __construct($basePath, EntityManager $em)
+    {
+        parent::__construct($basePath, $em);
+        $this->setPermission("article");
+    }
+
     protected function addAction(){
         $em = $this->getEntityManager();
         $tags = $em

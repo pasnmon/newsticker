@@ -24,6 +24,7 @@ if (class_exists($controllerName)) {
     $requestController = new $controllerName($basePath, $em);
     $requestController->run($action);
 } else {
+    echo "t1";
     $requestController = new Controllers\IndexController($basePath, $em);
     $requestController->render404();
 }

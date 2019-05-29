@@ -52,7 +52,7 @@ class User{
     protected $articles;
 
     /**
-     * @ORM\ManyToOne (targetEntity = "UserGroup", inversedBy="id")
+     * @ORM\ManyToOne (targetEntity = "UserGroup", inversedBy="users")
      */
     protected $userGroup;
 

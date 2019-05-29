@@ -23,6 +23,28 @@ function getGroupId($em){
     }
 }
 
+function getGroup($em){
+    if (isset($_SESSION["user_id"]) && !empty($_SESSION["user_id"])) {
+        $group = $em
+                ->createQueryBuilder()
+                ->select("g")
+                ->from("Entities\UserGroup","g")
+                ->where("g.id = :id")
+                ->setParameter("id",getGroupId($em))
+                ->getQuery()
+                ->getSingleResult();
+        return $group;
+    }
+}
+
+function getRights($rights,$em){
+    $method = "has".ucfirst($rights)."Rights";
+    $group = getGroup($em);
+    if (method_exists($group,$method)){
+        return $group->$method();
+    }
+}
+
 function logOut(){
     unset($_SESSION["user_id"]);
 }

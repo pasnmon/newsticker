@@ -10,6 +10,7 @@ abstract class AbstractBase
     protected $context = [];
     protected $em;
     protected $template;
+    protected $permission;
 
     public function __construct($basePath, EntityManager $em)
     {
@@ -21,6 +22,8 @@ abstract class AbstractBase
     {
         $this->addContext('action', $action);
         $this->addContext('controller', $this->getControllerShortName());
+        $this->addContext('articleRight', getRights("article",$this->em));
+        $this->addContext('userRight', getRights("user",$this->em));
 
         $methodName = $action . 'Action';
         $this->setTemplate($methodName);
@@ -87,6 +90,24 @@ abstract class AbstractBase
 
         return $message;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPermission()
+    {
+        return $this->permission;
+    }
+
+    /**
+     * @param mixed $permission
+     */
+    public function setPermission($permission)
+    {
+        $this->permission = ucfirst($permission);
+    }
+
+
 
     protected function recall($action, $controller)
     {

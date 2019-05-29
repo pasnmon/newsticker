@@ -9,9 +9,16 @@
 namespace Controllers;
 
 use Entities\User;
+use Doctrine\ORM\EntityManager;
 
 class UserController extends AbstractSecurity
 {
+
+    public function __construct($basePath, EntityManager $em)
+    {
+        parent::__construct($basePath, $em);
+        $this->setPermission("user");
+    }
 
     protected function showAction(){
         $em = $this->getEntityManager();
@@ -166,9 +173,23 @@ class UserController extends AbstractSecurity
 
     protected function deleteAction(){
         $em = $this->getEntityManager();
+
         $user = $em
             ->getRepository("Entities\User")
             ->find((int)$_REQUEST["id"]);
+
+        $deleted = $em
+                    ->createQueryBuilder()
+                    ->select("u")
+                    ->from("Entities\User","u")
+                    ->where("u.displayName = :dpName")
+                    ->setParameters(["dpName" => "deleted"])
+                    ->getQuery()
+                    ->getSingleResult();
+
+        $articles = $em
+                    ->getRepository("Entities\Article")
+                    ->findAll();
 
         $user || $this->render404();
 
@@ -179,6 +200,15 @@ class UserController extends AbstractSecurity
             $validator->validateCsrfToken($this->getTemplate(), $_POST);
 
             if($validator->isValid()){
+
+                foreach ($articles as $article){
+                    if ($article->getUserId() == $user->getId()){
+                        $article->setUser($deleted);
+                        $em->persist($article);
+                        $em->flush();
+                    }
+                }
+
                 $em->remove($user);
                 $em->flush();
 

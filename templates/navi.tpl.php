@@ -7,17 +7,21 @@
                 <li class="nav-item <?= ($controller == "IndexController" && ($action == "index" || $action == "read" || $action == "search"))? "active":""?>">
                     <a class="nav-link" href="index.php">Home</a>
                 </li>
-                <?php if (isLoggedIn() && getGroupId($em) == 1){ ?>
+                <?php if (isLoggedIn() && $articleRight){ ?>
                 <li class="nav-item <?= ($controller == "IndexController" && $action != "index" && $action != "read" && $action != "search")? "active":""?>">
                     <a class="nav-link" href="index.php?action=add">Create Article</a>
                 </li>
                 <li class="nav-item <?= ($controller == "TagController")? "active":""?>">
                     <a class="nav-link" href="index.php?controller=tag&action=add">Create Tag</a>
                 </li>
+                <?php if($userRight){ ?>
                 <li class="nav-item <?= ($controller == "UserController" && $action != "editUser")? "active":""?>">
                     <a class="nav-link" href="index.php?controller=user&action=show">Users</a>
                 </li>
-                <?php }elseif(!isLoggedIn()){ ?>
+                <li class="nav-item <?= $controller == "GroupController" ? "active":"" ?>">
+                    <a class="nav-link" href="index.php?controller=group&action=add">Group</a>
+                </li>
+                <?php }}elseif(!isLoggedIn()){ ?>
                 <li class="nav-item <?= ($action == "login")? "active":""?>">
                     <a class="nav-link" href="index.php?controller=user&action=login">Login</a>
                 </li>
@@ -33,7 +37,7 @@
                 <?php endif; ?>
             </ul>
         </div>
-    <?php if (($action == "index" || $action == "search") && ((isset($_GET["controller"]) && $_GET["controller"] != "user" ) || !isset($_GET["controller"]))): ?>
+
         <form class="navbar-form navbar-right" action="index.php" id="search" method="get">
             <div class="input-group no-flex">
                 <input type="hidden" name="action" value="search" />
@@ -47,5 +51,5 @@
                 </div>
             </div>
         </form>
-    <?php endif; ?>
+
 </nav>

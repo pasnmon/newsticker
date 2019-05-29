@@ -12,7 +12,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity (repositoryClass="Repositories\UserRepository")
+ * @ORM\Entity (repositoryClass="Repositories\UserGroupRepository")
  * @ORM\Table(name="userGroups")
  */
 class UserGroup
@@ -22,7 +22,6 @@ class UserGroup
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
-     * @ORM\OneToMany(targetEntity= "User", mappedBy="userGroup")
      */
     protected $id = 0;
 
@@ -31,13 +30,23 @@ class UserGroup
      */
     protected $title = "";
 
+
+    /**
+     * @ORM\Column(type="string", length=2)
+     */
+    protected $rights = 00;
+
+    /**
+    * @ORM\OneToMany(targetEntity= "User", mappedBy="userGroup")
+     */
     protected $users;
 
     use \Traits\ArrayMappable;
 
-    public function __construct(array  $data = [])
+    public function __construct(array $data = [])
     {
         $this->mapFromArray($data);
+
         $this->users = new ArrayCollection();
     }
 
@@ -71,15 +80,51 @@ class UserGroup
         return $this->id;
     }
 
-    public function clearUsers(){
+    /**
+     * @return mixed
+     */
+    public function getRightsArticle()
+    {
+        return $this->rights[0];
+    }
+
+    public function getRightsUser()
+    {
+        return $this->rights[1];
+    }
+
+    public function hasArticleRights(){
+        return $this->getRightsArticle() == 1;
+    }
+
+    public function hasUserRights(){
+        return $this->getRightsUser() == 1;
+    }
+    /**
+     * @param mixed $rights
+     */
+    public function setRightsArticle($rights)
+    {
+        $this->rights = $rights . $this->rights[1];
+    }
+
+    public function setRightsUser($rights)
+    {
+        $this->rights = $this->rights[0] . $rights;
+    }
+
+    public function clearUsers()
+    {
         $this->users->clear();
     }
 
-    public function addUser(User $user){
+    public function addUser(User $user)
+    {
         $this->users->add($user);
     }
 
-    public function hasUser(User $user){
+    public function hasUser(User $user)
+    {
         return $this->users->contains($user);
     }
 
@@ -87,4 +132,9 @@ class UserGroup
     {
         $this->users->removeElement($user);
     }
+
+    public function getUsers(){
+        return $this->users;
+    }
+
 }
