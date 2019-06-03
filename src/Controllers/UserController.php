@@ -16,8 +16,7 @@ class UserController extends AbstractSecurity
 
     public function __construct($basePath, EntityManager $em)
     {
-        parent::__construct($basePath, $em);
-        $this->setPermission("user");
+        parent::__construct($basePath, $em,"user");
     }
 
     protected function showAction(){

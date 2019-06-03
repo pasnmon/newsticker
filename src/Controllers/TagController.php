@@ -16,8 +16,7 @@ class TagController extends AbstractSecurity
 
     public function __construct($basePath, EntityManager $em)
     {
-        parent::__construct($basePath, $em);
-        $this->setPermission("article");
+        parent::__construct($basePath, $em,"article");
     }
 
     protected function addAction(){

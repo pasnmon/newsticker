@@ -31,7 +31,7 @@
         <label for="title">Title*</label>
         <input type="text" name="title" value="<?= clean($group->getTitle(),false) ?>" maxlength="80"/>
 
-        <h5 class="mt-5">Rechte:</h5>
+        <h5 class="mt-5">Berechtigung:</h5>
         <input type="hidden" name="rightsArticle" value="0" />
         <input type="checkbox" name="rightsArticle" value="1" <?= $group->hasArticleRights() ? "checked" : "" ?> />
         <label for="rightsArticle">Artikel bearbeiten/erstellen</label>

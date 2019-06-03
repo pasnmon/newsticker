@@ -7,14 +7,14 @@
                 <li class="nav-item <?= ($controller == "IndexController" && ($action == "index" || $action == "read" || $action == "search"))? "active":""?>">
                     <a class="nav-link" href="index.php">Home</a>
                 </li>
-                <?php if (isLoggedIn() && $articleRight){ ?>
+                <?php if (isLoggedIn() && $articleRights){ ?>
                 <li class="nav-item <?= ($controller == "IndexController" && $action != "index" && $action != "read" && $action != "search")? "active":""?>">
                     <a class="nav-link" href="index.php?action=add">Create Article</a>
                 </li>
                 <li class="nav-item <?= ($controller == "TagController")? "active":""?>">
                     <a class="nav-link" href="index.php?controller=tag&action=add">Create Tag</a>
                 </li>
-                <?php if($userRight){ ?>
+                <?php if($userRights){ ?>
                 <li class="nav-item <?= ($controller == "UserController" && $action != "editUser")? "active":""?>">
                     <a class="nav-link" href="index.php?controller=user&action=show">Users</a>
                 </li>

@@ -25,7 +25,7 @@
 
         <div class="links">
             <a href="index.php?action=read&id=<?= $article->getId() ?>"><i class="fas fa-info fa-2x"></i></a>
-            <?php if (isLoggedIn() && $articleRight): ?>
+            <?php if (isLoggedIn() && $articleRights): ?>
             <a href="index.php?action=edit&id=<?= $article->getId() ?>"><i class="fas fa-edit fa-2x"></i></a>
             <a href="index.php?action=delete&id=<?= $article->getId() ?>"><i class="fas fa-trash-alt fa-2x"></i></a>
             <?php endif; ?>

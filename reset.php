@@ -31,7 +31,7 @@ foreach ($entries as $entry) {
     $tag = new Tag($entry);
     $em->persist($tag);
 }
-$entries = [["title" => "Admin","rights" => 11], ["title" => "Gast","rights" => 11]];
+$entries = [["title" => "Admin","rights" => 11], ["title" => "Gast","rights" => 00]];
 foreach ($entries as $entry){
     $userGroup = new \Entities\UserGroup($entry);
     $em->persist($userGroup);

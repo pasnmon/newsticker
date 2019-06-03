@@ -15,8 +15,7 @@ class GroupController extends AbstractSecurity
 
     public function __construct($basePath, EntityManager $em)
     {
-        parent::__construct($basePath, $em);
-        $this->setPermission("user");
+        parent::__construct($basePath, $em,"user");
     }
 
     protected function addAction(){
@@ -70,8 +69,6 @@ class GroupController extends AbstractSecurity
                 $em->flush();
 
                 $this->setMessage("Group edited");
-                xdebug_var_dump($group);
-                var_dump($_POST);
                 $this->redirect("index","index");
             }
 
