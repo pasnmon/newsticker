@@ -20,6 +20,7 @@ class UserController extends AbstractSecurity
     }
 
     protected function showAction(){
+
         $em = $this->getEntityManager();
         $users = $em->getRepository("Entities\User")
                     ->findAll();
@@ -27,6 +28,7 @@ class UserController extends AbstractSecurity
     }
 
     protected function loginAction(){
+
         $em = $this->getEntityManager();
 
         if ($_POST){
@@ -59,16 +61,14 @@ class UserController extends AbstractSecurity
     }
 
     protected function logoutAction(){
-        if (isset($_SESSION["user_id"]) && !empty($_SESSION["user_id"])){
+
             logOut();
             $this->setMessage("User ausgeloggt");
             $this->redirect();
-        }
-        $this->setMessage("Sie sind nicht eingeloggt");
-        $this->redirect();
     }
 
     protected function registerAction(){
+
         $em = $this->getEntityManager();
         $user = new User();
 
@@ -97,6 +97,7 @@ class UserController extends AbstractSecurity
     }
 
     protected function editUserAction(){
+
         $em = $this->getEntityManager();
         $user = $em
                 ->getRepository("Entities\User")
@@ -131,6 +132,7 @@ class UserController extends AbstractSecurity
     }
 
     protected function editAction(){
+
         $em = $this->getEntityManager();
         $user = $em
             ->getRepository('Entities\User')
@@ -171,6 +173,7 @@ class UserController extends AbstractSecurity
     }
 
     protected function deleteAction(){
+
         $em = $this->getEntityManager();
 
         $user = $em

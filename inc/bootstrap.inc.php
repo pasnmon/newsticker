@@ -9,4 +9,3 @@ use Webmasters\Doctrine\Bootstrap;
 $bootstrap = Bootstrap::getInstance();
 
 $em = $bootstrap->getEm();
-

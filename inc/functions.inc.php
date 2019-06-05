@@ -8,7 +8,7 @@ function isLoggedIn(){
     return (isset($_SESSION["user_id"]) && !empty($_SESSION["user_id"]));
 }
 
-function getGroupId($em){
+function getGroupId($em){               //returns group id
     if (isset($_SESSION["user_id"]) && !empty($_SESSION["user_id"])) {
         $user = $em
             ->createQueryBuilder()
@@ -23,7 +23,7 @@ function getGroupId($em){
     }
 }
 
-function getGroup($em){
+function getGroup($em){         //returns the group of the current logged in user
     if (isset($_SESSION["user_id"]) && !empty($_SESSION["user_id"])) {
         $group = $em
                 ->createQueryBuilder()
@@ -37,7 +37,7 @@ function getGroup($em){
     }
 }
 
-function getRights($rights,$em){
+function getRights($rights,$em){                    //returns true if user has the permission
     $method = "has".ucfirst($rights)."Rights";
     $group = getGroup($em);
     if (method_exists($group,$method)){

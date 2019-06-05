@@ -33,10 +33,11 @@ abstract class AbstractSecurity extends AbstractBase
         $this->addContext('userRights', getRights("user",$this->em));
 
 
-        if (!in_array($action,["login","register","index","read"]) && !isLoggedIn() ){
+        //if not logged in and action is not login,register,index or read -> redirect
+        if (!in_array($action,["login","register","index","read"]) && !isLoggedIn() )
             $this->redirect("login","user");
-        }
 
+        //checks the rights of action and user if no rights -> redirect
         if (in_array($action,["edit","delete","add","show"]) && !getRights($this->getPermission(),$this->getEntityManager()))
                 $this->redirect();
 

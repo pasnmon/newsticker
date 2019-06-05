@@ -18,6 +18,8 @@ use Doctrine\ORM\Mapping as ORM;
 class UserGroup
 {
 
+    use \Traits\ArrayMappable;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -34,14 +36,12 @@ class UserGroup
     /**
      * @ORM\Column(type="string", length=2)
      */
-    protected $rights = 00;
+    protected $rights = "00";           //Permission of the group: First value = Rights for Articles, Second value = Rights for user & usergroups
 
     /**
     * @ORM\OneToMany(targetEntity= "User", mappedBy="userGroup")
      */
     protected $users;
-
-    use \Traits\ArrayMappable;
 
     public function __construct(array $data = [])
     {

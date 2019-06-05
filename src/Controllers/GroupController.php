@@ -112,7 +112,7 @@ class GroupController extends AbstractSecurity
 
                 foreach ($users as $user){
 
-                    if ($user->getUserGroupId() == $group->getId()){
+                    if ($user->getUserGroupId() == $group->getId()){        //Users of the group that gets deleted, get the guest group
 
                         $user->setUserGroup($guestGroup);
                         $em->persist($user);
